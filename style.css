@@ -1,0 +1,41 @@
+body {
+    font-family: 'Architects daughter';
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #DFDBE5;
+     
+}
+.main-wrapper {
+    border: 1px solid black;
+    background-color: #e5e5e5;
+    font-size: x-large;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 660px;
+    height: 470px;
+    border-radius: 60px;
+}
+.input-field {
+    font-family: 'Cambria';
+    height: 35px;
+    width: 200px;
+    text-align: center;
+    font-size: 25px;
+}
+.search {
+    display: flex;
+    align-items: center;
+}
+h2 {
+    margin: 8px;
+    padding-top: 10px;
+}
+.result {
+    padding-left: 40px;
+}

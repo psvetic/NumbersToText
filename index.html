@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Architects Daughter' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Numbers to text converter</title>
+</head>
+<body>
+    <div class="main-wrapper">
+            <h2>Hello.</h2>
+        <div>
+            <hr>
+            <p> > Select a language, type a number and voilà < </p>
+        </div>
+        <div class="form-wrapper">
+            <form id="form" onsubmit="return false;">
+                <div>
+                    <input id="r1" type="radio" name="lang" value="eng"></input>
+                    <label for="r1">English</label>
+                </div>
+                <div>
+                    <input id="r2" type="radio" name="lang" value="hrv"></input>
+                    <label for="r2">Hrvatski</label>
+                </div>
+                <div class="search">
+                    <input class="input-field" type="text" name="number"></input>
+                    <input type="image" src="https://img.icons8.com/carbon-copy/50/000000/search.png" onclick="getValue();">
+                </div>
+            </form>
+        </div>
+        <div>
+            <p>OR - get a random value <button type="button" onclick="getRandom();">GO</button></p>
+        </div>
+        <div class="result">
+            <p>Result</p>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
