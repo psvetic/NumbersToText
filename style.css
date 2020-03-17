@@ -1,5 +1,7 @@
 body {
     font-family: 'Architects daughter';
+    background-image: url('./floating-cogs.svg');
+    background-blend-mode: overlay;
     margin: 0;
     overflow: hidden;
     height: 100vh;
