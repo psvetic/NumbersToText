@@ -1,15 +1,14 @@
-let valuesEng = ["zero","one","two","three","four","five","six","seven","eight","nine","ten",
-"eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+let numValues = [["zero","one","two","three","four","five","six","seven","eight","nine","ten",
+                  "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"],
+                 ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset",
+                  "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šesnaest", "sedamnaest", "osamnaest", "devetnaest"]];
 
-let valuesHrv = ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset",
-"jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šesnaest", "sedamnaest", "osamnaest", "devetnaest"];
-
-let deset = ["nula", "deset", "dvadeset", "trideset", "četrdeset", "pedeset", "šezdeset", "sedamdeset", "osamdeset", "devedeset"];
-
-let ten = ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+let deset = [["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
+             ["nula", "deset", "dvadeset", "trideset", "četrdeset", "pedeset", "šezdeset", "sedamdeset", "osamdeset", "devedeset"]];
 
 let numberToConvert = 0;
-let lang = "";
+let language = "";
+let lang = 0;
 let numberAsString = [];
 let change = [];
 let finalString = [];
@@ -17,34 +16,39 @@ let numberLength = 0;
 let finalfinal = "";
 
 function getValue() {
+    finalString = [];
+    finalfinal = "";
+
     document.querySelector(".result").innerHTML = "Result";
 
     numberToConvert = document.querySelector(".input-field").value;
-    lang = document.querySelector('input[name="lang"]:checked').value;
-    console.log("FIRST", numberToConvert, lang);
+    language = document.querySelector('input[name="lang"]:checked').value;
+    if (language == "eng") {
+        lang = 0;
+    } else {
+        lang = 1;
+    }
+    console.log("FIRST", numberToConvert, language);
 
-    other();
+    main();
 
     document.querySelector(".result").innerHTML = "Result: " + finalfinal;
-    finalString = [];
-    finalfinal = "";
 }
 
 function getRandom() {
+    finalString = [];
+    finalfinal = "";
+
     document.querySelector(".result").innerHTML = "Result";
 
     let temp = Math.random() * 1000000;
     numberToConvert = temp.toFixed(2);
-    lang = "hrv";
 
     document.querySelector(".input-field").value = numberToConvert;
-    document.querySelector('input[name="lang"]').value = "hrv";
 
-    other();
+    main();
 
     document.querySelector(".result").innerHTML = "Result: " + finalfinal;
-    finalString = [];
-    finalfinal = "";
 }
 
 function changeGender(number, word)
@@ -114,61 +118,95 @@ function changeGender(number, word)
     }
 }
 
-function dictionary(number, position)
+function dictionary(number, position, lang)
 {
     if (number === 0) {
         return;
     }
     switch(position) {
         case 1:
-            finalString.push("i", valuesHrv[number]);
+            if (lang == 1) {
+                finalString.push("i");
+            }
+            finalString.push(numValues[lang][number]);
             break;
         case 2:
             if (number < 20 && number > 10) {
-                finalString.push("i", valuesHrv[number]);
+                if (lang == 1) {
+                    finalString.push("i");
+                }
+                finalString.push(numValues[lang][number]);
             } else if (number > 19) {
-                finalString.push("i", deset[number/10]);
+                if (lang == 1) {
+                    finalString.push("i");
+                }
+                finalString.push(deset[lang][number/10]);
             } else if (number > 0 && number < 10) {
-                finalString.push(deset[number]);
+                finalString.push(deset[lang][number]);
             } else if (number == "00") {
                 return;
             }
             break;
         case 5:
             if (number < 20 && number > 10) {
-                finalString.push(valuesHrv[number], "tisuća");
+                finalString.push(numValues[lang][number]);
+                if (lang == 1) {
+                    finalString.push("tisuća");
+                } else {
+                    finalString.push("thousand");
+                }
             } else if (number > 19) {
-                finalString.push(deset[number/10], "tisuća");
+                finalString.push(deset[lang][number/10]);
+                if (lang == 1) {
+                    finalString.push("tisuća");
+                } else {
+                    finalString.push("thousand");
+                }
             } else if (number > 0 && number < 10) {
-                finalString.push(deset[number]);
+                finalString.push(deset[lang][number]);
             } else if (number == "00") {
-                finalString.push("tisuća");
+                if (lang == 1) {
+                    finalString.push("tisuća");
+                } else {
+                    finalString.push("thousand");
+                }
             }
             break;
         case 3:
         case 6:
-            finalString.push(valuesHrv[number], "stotina");
-            changeGender(number, 's');
+            if (lang == 1){
+                finalString.push(numValues[lang][number], "stotina");
+                changeGender(number, 's');
+            } else {
+                finalString.push(numValues[lang][number], "hundred");
+            }
             break;
         case 4:
-            finalString.push(valuesHrv[number], "tisuća");
-            changeGender(number,'t');
+            if (lang == 1){
+                finalString.push(numValues[lang][number], "tisuća");
+                changeGender(number,'t');
+            } else {
+                finalString.push(numValues[lang][number], "thousand");
+            }
             break;
         default:
             console.log("Something's wrong.");
     }
 }
 
-function other() {
+function main() {
 
-if (Math.floor(numberToConvert) !== numberToConvert) {
+// ako postoje lipe
+if (Math.floor(numberToConvert) != numberToConvert) {
     numberAsString = numberToConvert.toString().split('');
     
     change = numberAsString.splice(numberAsString.indexOf(".") + 1, 2);
     
     numberAsString.pop();
 
-} else {
+}
+// number is int rather than float
+else {
     numberAsString = numberToConvert.toString().split('');
     change = ["0"];
 }
@@ -187,27 +225,48 @@ if (numberAsString[numberLength-5] == 1 || numberAsString[numberLength-4] == 0)
     numberAsString[numberLength-5] = numberAsString[numberLength-5] + numberAsString[numberLength-4];
     numberAsString.splice(numberLength-4, 1);
 
-    for (let i=0; i < 2; i++) {
-        dictionary(numberAsString[i], numberLength-i);
-    }
-    for (let i=2; i < numberAsString.length; i++) {
-        dictionary(numberAsString[i], numberLength-i-1);
+    if (numberLength == 5) {
+        for (let i=0; i < 1; i++) {
+            dictionary(numberAsString[i], numberLength-i, lang);
+        }
+        for (let i=1; i < numberAsString.length; i++) {
+            dictionary(numberAsString[i], numberLength-i-1, lang);
+        }
+    } else {
+        for (let i=0; i < 2; i++) {
+            dictionary(numberAsString[i], numberLength-i, lang);
+        }
+        for (let i=2; i < numberAsString.length; i++) {
+            dictionary(numberAsString[i], numberLength-i-1, lang);
+        }
     }
 
-    finalString.push("kuna");
-    changeGender(numberAsString[numberAsString.length-1], 'k');
+    if (lang == 1) {
+        finalString.push("kuna");
+        changeGender(numberAsString[numberAsString.length-1], 'k');
+    } else {
+        finalString.push("dollars");
+    }
 
 } else {
     if(numberToConvert > 19) {
         for (let i=0; i < numberAsString.length; i++) {
-            dictionary(numberAsString[i], numberLength-i);
+            dictionary(numberAsString[i], numberLength-i, lang);
         }
-        finalString.push("kuna");
-        changeGender(numberAsString[numberAsString.length-1], 'k');
+        if (lang == 1) {
+            finalString.push("kuna");
+            changeGender(numberAsString[numberAsString.length-1], 'k');
+        } else {
+            finalString.push("dollars");
+        }
     }
     else {
-        finalString.push(valuesHrv[numberToConvert]);
-        finalString.push("kuna");
+        finalString.push(numValues[lang][numberToConvert]);
+        if (lang == 1) {
+            finalString.push("kuna");
+        } else {
+            finalString.push("dollars");
+        }
     }
 }
 
@@ -216,14 +275,34 @@ if (change[0] == 1 && change.length > 1)
     change[0] = change[0] + change[1];
     change.pop();
 
-    finalString.push("i", valuesHrv[change[0]], "lipa");
+    if (lang == 1) {
+        finalString.push("i", numValues[lang][change[0]], "lipa");
+    } else {
+        finalString.push("and", numValues[lang][change[0]], "cents");
+    }
 } else if (change.length == 1) {
-    finalString.push("i", deset[change[0]], "lipa");
+    if (lang == 1) {
+        finalString.push("i", deset[lang][change[0]], "lipa");
+    } else {
+        finalString.push("and", deset[lang][change[0]], "cents");
+    }
 } else {
-    dictionary(change[0], 2);
-    dictionary(change[1], 1);
-    finalString.push("lipa");
-    changeGender(change[1], 'l');
+    if (lang == 1) {
+        finalString.push("i");
+    } else {
+        finalString.push("and");
+    }
+
+    dictionary(change[0], 2, lang);
+    dictionary(change[1], 1, lang);
+
+    if (lang == 1) {
+        finalString.push("lipa");
+        changeGender(change[1], 'l');
+    } else {
+        finalString.push("cents");
+    }
+
 }
 
 console.log(change);
