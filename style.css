@@ -41,3 +41,19 @@ h2 {
 .result {
     padding-left: 40px;
 }
+
+@media only screen and (max-width: 600px) {
+    .main-wrapper {
+        width: auto;
+        height: auto;
+        margin: 0px 22px;
+        padding: 15px 0px;
+    }
+    p {
+        padding: 0px 20px 0px 25px;
+        text-align: center;
+    }
+    .result {
+        padding-left: 25px;
+    }
+}
