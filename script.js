@@ -28,7 +28,7 @@ function getValue() {
     } else {
         lang = 1;
     }
-    console.log("FIRST", numberToConvert, language);
+    console.log(numberToConvert, language);
 
     main();
 
@@ -197,7 +197,8 @@ function dictionary(number, position, lang)
 function main() {
 
 // ako postoje lipe
-if (Math.floor(numberToConvert) != numberToConvert) {
+if (Math.floor(numberToConvert).toString() != numberToConvert.toString()) {
+    
     numberAsString = numberToConvert.toString().split('');
     
     change = numberAsString.splice(numberAsString.indexOf(".") + 1, 2);
@@ -270,6 +271,13 @@ if (numberAsString[numberLength-5] == 1 || numberAsString[numberLength-4] == 0)
     }
 }
 
+// modifikacije lipa
+
+// if change is "00"
+if (change[0] == 0 && change[1] == 0) {
+    change.pop();
+}
+// numbers from 11 to 19
 if (change[0] == 1 && change.length > 1)
 {
     change[0] = change[0] + change[1];
@@ -280,12 +288,14 @@ if (change[0] == 1 && change.length > 1)
     } else {
         finalString.push("and", numValues[lang][change[0]], "cents");
     }
+// numbers 10, 20, ... , 90
 } else if (change.length == 1) {
     if (lang == 1) {
         finalString.push("i", deset[lang][change[0]], "lipa");
     } else {
         finalString.push("and", deset[lang][change[0]], "cents");
     }
+// all the other numbers
 } else {
     if (lang == 1) {
         finalString.push("i");
