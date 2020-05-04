@@ -45,6 +45,14 @@ function getRandom() {
     numberToConvert = temp.toFixed(2);
 
     document.querySelector(".input-field").value = numberToConvert;
+  
+    language = document.querySelector('input[name="lang"]:checked').value;
+    if (language == "eng") {
+        lang = 0;
+    } else {
+        lang = 1;
+    }
+    console.log(numberToConvert, language);
 
     main();
 
