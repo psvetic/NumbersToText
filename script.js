@@ -129,6 +129,7 @@ function changeGender(number, word)
 
 function dictionary(number, position, lang)
 {
+    console.log(number, position);
     if (number == 0) {
         return;
     }
@@ -213,13 +214,14 @@ if (Math.floor(numberToConvert).toString() != numberToConvert.toString()) {
     for (let i=0; i < numberAsString.length; i++) {
         if (isNaN(numberAsString[i])) {
             decimalPointPos = i;
-            break;
         }
     }
     
     change = numberAsString.splice(decimalPointPos + 1, 2);
     
     numberAsString.pop();
+
+    numberToConvert = [...numberAsString, ".", ...change].join('');
 
 }
 // number is int rather than float
