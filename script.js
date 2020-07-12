@@ -7,6 +7,7 @@ let deset = [["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "sev
              ["nula", "deset", "dvadeset", "trideset", "četrdeset", "pedeset", "šezdeset", "sedamdeset", "osamdeset", "devedeset"]];
 
 let numberToConvert = 0;
+let decimalPointPos = 0;
 let language = "";
 let lang = 0;
 let numberAsString = [];
@@ -128,7 +129,7 @@ function changeGender(number, word)
 
 function dictionary(number, position, lang)
 {
-    if (number === 0) {
+    if (number == 0) {
         return;
     }
     switch(position) {
@@ -208,8 +209,15 @@ function main() {
 if (Math.floor(numberToConvert).toString() != numberToConvert.toString()) {
     
     numberAsString = numberToConvert.toString().split('');
+
+    for (let i=0; i < numberAsString.length; i++) {
+        if (isNaN(numberAsString[i])) {
+            decimalPointPos = i;
+            break;
+        }
+    }
     
-    change = numberAsString.splice(numberAsString.indexOf(".") + 1, 2);
+    change = numberAsString.splice(decimalPointPos + 1, 2);
     
     numberAsString.pop();
 
