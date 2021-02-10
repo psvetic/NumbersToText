@@ -318,6 +318,7 @@ function main() {
         if (change[0] == 0 && change.length > 1) {
             if (lang == 0) {
                 finalString.push("and");
+            }
         } else {
             if (lang == 1) {
                 finalString.push("i");
