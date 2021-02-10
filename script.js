@@ -199,7 +199,7 @@ function dictionary(number, position, lang) {
                 finalString.push("i", numValues[lang][number], "tisuća");
                 changeGender(number, 't');
             } else {
-                finalString.push("and", numValues[lang][number], "thousand");
+                finalString.push(numValues[lang][number], "thousand");
             }
             break;
         default:
@@ -316,12 +316,11 @@ function main() {
     } else {
         // numbers from 1 to 9
         if (change[0] == 0 && change.length > 1) {
-
+            if (lang == 0) {
+                finalString.push("and");
         } else {
             if (lang == 1) {
                 finalString.push("i");
-            } else {
-                finalString.push("and");
             }
         }
 
