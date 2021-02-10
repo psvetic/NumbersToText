@@ -322,6 +322,8 @@ function main() {
         } else {
             if (lang == 1) {
                 finalString.push("i");
+            } else {
+                finalString.push("and");
             }
         }
 
