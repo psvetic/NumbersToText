@@ -196,7 +196,11 @@ function dictionary(number, position, lang) {
             break;
         case 4:
             if (lang == 1) {
-                finalString.push("i", numValues[lang][number], "tisuća");
+                if (parseInt(numberToConvert).toString().length <= 4) {
+                    finalString.push(numValues[lang][number], "tisuća");
+                } else {
+                    finalString.push("i", numValues[lang][number], "tisuća");
+                }
                 changeGender(number, 't');
             } else {
                 finalString.push(numValues[lang][number], "thousand");
