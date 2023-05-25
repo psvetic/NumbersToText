@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Numbers to text converter</title>
 </head>
+
 <body>
     <div class="main-wrapper">
-            <h2>Hello.</h2>
+        <h2>Hello Borna.</h2>
         <div>
             <hr>
             <p> > Select a language, type a number and voilà < </p>
@@ -25,9 +27,18 @@
                     <input id="r2" type="radio" name="lang" value="hrv" checked></input>
                     <label for="r2">Hrvatski</label>
                 </div>
+                <div class="select-wrapper">
+                    <label for="currency" class="label">Odaberi valutu: </label>
+                    <select id="currency" class="currency" name="currency">
+                        <option value="EUR" selected>EUR</option>
+                        <option value="USD">USD</option>
+                        <option value="HRK">HRK</option>
+                    </select><br>
+                </div>
                 <div class="search">
                     <input class="input-field" type="text" name="number"></input>
-                    <input type="image" src="https://img.icons8.com/carbon-copy/50/000000/search.png" onclick="getValue();">
+                    <input type="image" src="https://img.icons8.com/carbon-copy/50/000000/search.png"
+                        onclick="getValue();">
                 </div>
             </form>
         </div>
@@ -41,4 +52,5 @@
 
     <script src="./script.js"></script>
 </body>
+
 </html>
