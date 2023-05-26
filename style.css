@@ -20,7 +20,7 @@ body {
     flex-flow: column;
     align-items: center;
     width: 660px;
-    height: 470px;
+    height: 500px;
     border-radius: 60px;
 }
 .input-field {

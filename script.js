@@ -83,7 +83,14 @@ let numberLength = 0;
 let finalfinal = "";
 
 function getValue() {
+  numberToConvert = 0;
+  decimalPointPos = 0;
+  language = "";
+  lang = 0;
+  numberAsString = [];
+  change = [];
   finalString = [];
+  numberLength = 0;
   finalfinal = "";
 
   document.querySelector(".result").innerHTML = "Result";
@@ -105,7 +112,14 @@ function getValue() {
 }
 
 function getRandom() {
+  numberToConvert = 0;
+  decimalPointPos = 0;
+  language = "";
+  lang = 0;
+  numberAsString = [];
+  change = [];
   finalString = [];
+  numberLength = 0;
   finalfinal = "";
 
   document.querySelector(".result").innerHTML = "Result";
@@ -170,6 +184,16 @@ function changeGender(number, word) {
           return;
         }
         finalString.push("eura");
+        break;
+      case "d":
+        finalString.pop();
+
+        if (number == 1) {
+          finalString.pop();
+          finalString.push("jedan", "dolar");
+          return;
+        }
+        finalString.push("dolara");
         break;
       case "c":
         finalString.pop();
@@ -330,7 +354,7 @@ function main() {
     change = numberAsString.splice(decimalPointPos + 1, 2);
     numberAsString.pop();
   } else {
-    change = ["0"];
+    change.push("0");
     console.log("no change for u");
   }
 
@@ -339,6 +363,7 @@ function main() {
   console.log("standard", numberToConvert);
 
   numberLength = numberAsString.length;
+  console.log("len", numberLength);
 
   // number on second place join with next one
   if (
@@ -374,43 +399,82 @@ function main() {
       }
     }
 
-    if (lang == 1 && currency == "HRK") {
-      finalString.push("kuna");
-      changeGender(numberAsString[numberAsString.length - 1], "k");
-    } else if (lang == 1 && currency == "EUR") {
-      finalString.push("eura");
-      changeGender(numberAsString[numberAsString.length - 1], "e");
-    } else if (lang == 0 && currency == "EUR") {
-      finalString.push("euros");
-    } else if (lang == 0 && currency == "USD") {
-      finalString.push("dollars");
+    // engleski
+    if (lang == 0) {
+      if (currency == "HRK") {
+        finalString.push("kunas");
+      } else if (currency == "EUR") {
+        finalString.push("euros");
+      } else if (currency == "USD") {
+        finalString.push("dollars");
+      }
     }
+    // hrvatski
+    else {
+      if (currency == "HRK") {
+        finalString.push("kuna");
+        changeGender(numberAsString[numberAsString.length - 1], "k");
+      } else if (currency == "EUR") {
+        finalString.push("eura");
+        changeGender(numberAsString[numberAsString.length - 1], "e");
+      } else if (currency == "USD") {
+        finalString.push("dolara");
+        changeGender(numberAsString[numberAsString.length - 1], "d");
+      }
+    }
+
+    // other numbers
   } else {
+    // something something
     if (numberToConvert > 19) {
       for (let i = 0; i < numberAsString.length; i++) {
         dictionary(numberAsString[i], numberLength - i, lang);
       }
-      if (lang == 1 && currency == "HRK") {
-        finalString.push("kuna");
-        changeGender(numberAsString[numberAsString.length - 1], "k");
-      } else if (lang == 1 && currency == "EUR") {
-        finalString.push("eura");
-        changeGender(numberAsString[numberAsString.length - 1], "e");
-      } else if (lang == 0 && currency == "EUR") {
-        finalString.push("euros");
-      } else {
-        finalString.push("dollars");
+      // engleski
+      if (lang == 0) {
+        if (currency == "HRK") {
+          finalString.push("kunas");
+        } else if (currency == "EUR") {
+          finalString.push("euros");
+        } else if (currency == "USD") {
+          finalString.push("dollars");
+        }
       }
+      // hrvatski
+      else {
+        if (currency == "HRK") {
+          finalString.push("kuna");
+          changeGender(numberAsString[numberAsString.length - 1], "k");
+        } else if (currency == "EUR") {
+          finalString.push("eura");
+          changeGender(numberAsString[numberAsString.length - 1], "e");
+        } else if (currency == "USD") {
+          finalString.push("dolara");
+          changeGender(numberAsString[numberAsString.length - 1], "d");
+        }
+      }
+      // jednoznamenkasti brojevi?
     } else {
       finalString.push(numValues[lang][numberToConvert]);
-      if (lang == 1 && currency == "HRK") {
-        finalString.push("kuna");
-      } else if (lang == 1 && currency == "EUR") {
-        finalString.push("eura");
-      } else if (lang == 0 && currency == "EUR") {
-        finalString.push("euros");
-      } else {
-        finalString.push("dollars");
+      // engleski
+      if (lang == 0) {
+        if (currency == "HRK") {
+          finalString.push("kunas");
+        } else if (currency == "EUR") {
+          finalString.push("euros");
+        } else if (currency == "USD") {
+          finalString.push("dollars");
+        }
+      }
+      // hrvatski
+      else {
+        if (currency == "HRK") {
+          finalString.push("kuna");
+        } else if (currency == "EUR") {
+          finalString.push("eura");
+        } else if (currency == "USD") {
+          finalString.push("dolara");
+        }
       }
     }
   }
@@ -427,21 +491,41 @@ function main() {
     change.pop();
 
     // all numbers
-    if (lang == 1 && currency == "HRK") {
-      finalString.push("i", numValues[lang][change[0]], "lipa");
-    } else if (lang == 1 && currency == "EUR") {
-      finalString.push("i", numValues[lang][change[0]], "centi");
-    } else {
-      finalString.push("and", numValues[lang][change[0]], "cents");
+
+    // engleski
+    if (lang == 0) {
+      if (currency == "HRK") {
+        finalString.push("and", numValues[lang][change[0]], "lipas");
+      } else {
+        finalString.push("and", numValues[lang][change[0]], "cents");
+      }
     }
+    // hrvatski
+    else {
+      if (currency == "HRK") {
+        finalString.push("i", numValues[lang][change[0]], "lipa");
+      } else {
+        finalString.push("i", numValues[lang][change[0]], "centi");
+      }
+    }
+
     // numbers 10, 20, ... , 90
   } else if (change.length == 1) {
-    if (lang == 1 && currency == "HRK") {
-      finalString.push("i", deset[lang][change[0]], "lipa");
-    } else if (lang == 1 && currency == "EUR") {
-      finalString.push("i", deset[lang][change[0]], "centi");
-    } else {
-      finalString.push("and", deset[lang][change[0]], "cents");
+    // engleski
+    if (lang == 0) {
+      if (currency == "HRK") {
+        finalString.push("and", deset[lang][change[0]], "lipas");
+      } else {
+        finalString.push("and", deset[lang][change[0]], "cents");
+      }
+    }
+    // hrvatski
+    else {
+      if (currency == "HRK") {
+        finalString.push("i", deset[lang][change[0]], "lipa");
+      } else {
+        finalString.push("i", deset[lang][change[0]], "centi");
+      }
     }
   } else {
     // numbers from 01 to 09
@@ -463,9 +547,11 @@ function main() {
     if (lang == 1 && currency == "HRK") {
       finalString.push("lipa");
       changeGender(change[1], "l");
-    } else if (lang == 1 && currency == "EUR") {
+    } else if (lang == 1 && (currency == "EUR" || currency == "USD")) {
       finalString.push("centi");
       changeGender(change[1], "c");
+    } else if (lang == 0 && currency == "HRK") {
+      finalString.push("lipas");
     } else {
       finalString.push("cents");
     }
